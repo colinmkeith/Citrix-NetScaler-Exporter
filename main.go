@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"json"
 	"net/http"
 	"os"
 	"strconv"
@@ -17,10 +18,19 @@ import (
 	"github.com/go-kit/kit/log/level"
 )
 
+type Configuration struct {
+	url string
+	username string
+	password string
+	bindPort int
+	ignoreCert bool
+}
+
 var (
 	app        = "Citrix-NetScaler-Exporter"
 	version    string
 	build      string
+	config     = flag.String("config", "", "Configuration file. E.g. citrix-netscaler-exporter.json")
 	url        = flag.String("url", "", "Base URL of the NetScaler management interface.  Normally something like https://my-netscaler.something.x")
 	username   = flag.String("username", "", "Username with which to connect to the NetScaler API")
 	password   = flag.String("password", "", "Password with which to connect to the NetScaler API")
@@ -30,6 +40,14 @@ var (
 	logger     log.Logger
 
 	nsInstance string
+
+//filename is the path to the json config file
+if config != nil {
+  file, err := os.Open(filename) if err != nil {  return err }
+  decoder := json.NewDecoder(file)
+  err = decoder.Decode(&configuration)
+  if err != nil {  return err }
+}
 
 	modelID = prometheus.NewDesc(
 		"model_id",

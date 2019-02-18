@@ -1,0 +1,7 @@
+{
+	"url": "https://my-netscaler.something.x",
+	"username": "nsroot",
+	"password": "nsroot",
+	"bindPort": 9280,
+	"ignoreCert": false
+}
