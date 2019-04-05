@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
-	"json"
+	"encoding/json"
 	"net/http"
 	"os"
 	"strconv"
