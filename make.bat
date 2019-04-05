@@ -4,7 +4,7 @@ SETLOCAL
 set _TARGETS=build
 
 set APP=Citrix-NetScaler-Exporter
-set VERSION=3.2.0
+set VERSION=3.2.1
 set BINARY-WINDOWS-X86=%APP%_%VERSION%_Windows_32bit.exe
 set BINARY-WINDOWS-X64=%APP%_%VERSION%_Windows_amd64.exe
 set BINARY-LINUX=%APP%_%VERSION%_amd64
