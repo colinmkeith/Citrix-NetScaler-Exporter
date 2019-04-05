@@ -41,14 +41,6 @@ var (
 
 	nsInstance string
 
-//filename is the path to the json config file
-if config != nil {
-  file, err := os.Open(filename) if err != nil {  return err }
-  decoder := json.NewDecoder(file)
-  err = decoder.Decode(&configuration)
-  if err != nil {  return err }
-}
-
 	modelID = prometheus.NewDesc(
 		"model_id",
 		"NetScaler model - reflects the bandwidth available; for example VPX 10 would report as 10.",
@@ -2616,6 +2608,15 @@ func (e *Exporter) Collect(ch chan<- prometheus.Metric) {
 }
 
 func main() {
+
+	//filename is the path to the json config file
+	if config != nil {
+		file, err := os.Open(filename)
+		if err != nil { return err }
+		decoder := json.NewDecoder(file)
+		err = decoder.Decode(&configuration)
+		if err != nil { return err }
+	}
 	flag.Parse()
 
 	if *versionFlg {
